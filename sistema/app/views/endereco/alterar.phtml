@@ -1,0 +1,89 @@
+<section>
+  <FORM name="agp" method="POST" action="<?php echo BASE .'endereco/redefinir-endereco/'. $view_id ;  ?>" enctype="multipart/form-data">
+    <aside class="container">
+
+      <?php echo (isset($this->alert) ? $this->alert : '');?>
+      <div class="row">
+
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+
+        </div>
+
+      </div>
+
+      <div class="col-sm-12">
+
+
+       <br>
+       <div class="panel panel-default">
+        <div class="panel-body">
+
+          <font size="6">
+            <center><b>Endereço da Conta</b></center>
+          </font>
+
+          <br>
+
+          <div class="col-md-3">
+          </div>
+
+          <div class="col-md-6">  
+
+            <div class="form-group">
+              <font size="3">
+
+                <center><b>Alterar Endereços</b></center>
+              </font>
+              <label for="editarendereco">Endereço:</label>
+              <input  required type="text" class="form-control" id="editarendereco" name="street" maxlength="50" value="<?php echo $view_endereco->street ; ?>">
+
+              <label for="editarnumero">Número:</label>
+              <input required  type="number" style="max-width:80px;" class="form-control" id="editarnumero" name="number" max=99999 value="<?php echo $view_endereco->number ; ?>">
+
+              <label for="editarcomplemento">Complemento:</label>
+              <input   type="text" style="max-width:320px;" class="form-control" id="editarcomplemento" name="complement" maxlength="50" value="<?php echo $view_endereco->complement  ?>">
+
+              <label for="editarbairro">Bairro:</label>
+              <input  required type="text" style="max-width:320px;" class="form-control" id="editarbairro" name="neighbourhood" maxlength="50" value="<?php echo $view_endereco->neighbourhood ; ?>">
+
+              <label for="editarcidade">Cidade:</label>
+              <input  required type="text" style="max-width:250px;" class="form-control" id="editarcidade" name="city" maxlength="50" value="<?php echo $view_endereco->city ; ?>">
+
+              <label for="editarcidade">CEP:</label>
+              <input required  type="number" style="max-width:150px;" class="form-control" id="editarcep" name="cep" max=99999999 value="<?php echo $view_endereco->cep ; ?>">
+
+              <label for="editarestado">Estado:</label>
+               <input required  type="text" style="max-width:150px;" class="form-control" id="editarcep" name="uf" value="<?php echo $view_endereco->uf; ?>" maxlength="2">
+              <br>
+              <center>
+              <a href="<?php echo BASE .'conta/endereco';?>"><button type="button" class="btn btn-default cor-botao">Voltar</button></a>
+                <input class="btn btn-default cor-botao" type="submit" aria-haspopup="true" aria-expanded="false" value="Modificar Endereço ">
+
+              </center>
+            </div> 
+          </div>
+          <div class="col-md-1">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="C:\wamp64\www\sistema\public\bower_components\bootstrap\js\jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual
+        files as needed -->
+        <script src="\bootstrap\js\bootstrap.min.js"></script>
+      </aside>
+    </section>
+  </FORM>
+</body>
+</html>

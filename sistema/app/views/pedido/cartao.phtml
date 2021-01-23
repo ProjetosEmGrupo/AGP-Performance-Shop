@@ -1,0 +1,249 @@
+<?php echo (isset($this->alert) ? $this->alert : '')?>
+<section>  
+<?php
+$par = "";
+  if(isset($view_parcela) && !empty($view_parcela)){
+    $par = $view_parcela;
+  }
+  
+ ?>
+<FORM name="agp" method="POST" action="<?php echo BASE .'pedido/conclusao/' . $view_request_id .'/'. $par; ?>" enctype="multipart/form-data">
+
+
+  <!-- aside significa o canto superior Esquerdo-->
+  <!-- Codigo da Barra de Categorias do Site-->
+  
+   
+
+  <div class="container">
+
+   <div class="col-md-12">
+
+
+     <div class="panel panel-default">
+      <div class="panel-body">
+
+        <font size="6">
+          <center><b><center>Pagamento por Cartões</center></b></center>
+        </font>
+        <br>
+
+        <div class="col-md-4">
+
+          <font size="3">
+
+
+           <?php
+           $preco = 0;
+
+           $vl_pedido = ItemRequest::find_all_by_request_id($view_request_id);
+           foreach ($vl_pedido as $vl) {
+            $preco = $preco + $vl->value_unit * $vl->amount;
+          }
+          $frete = Freight::find_by_request_id($view_request_id);
+
+          $preco = $preco + $frete->value_freight;
+          ?>
+          <p><b>Valor Total: </b>R$ <?php echo number_format($preco, 2, ',', '.'); ?></p>
+
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
+              Parcelas
+
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="<?php echo BASE . 'pedido/pagar/'. $view_request_id . '/1'; ?>">1x Sem Juros</a></li>
+              <li><a href="<?php echo BASE . 'pedido/pagar/'. $view_request_id . '/2'; ?>">2x Sem Juros</a></li>
+              <li><a href="<?php echo BASE . 'pedido/pagar/'. $view_request_id . '/3'; ?>">3x Sem Juros</a></li>
+              <li><a href="<?php echo BASE . 'pedido/pagar/'. $view_request_id . '/4'; ?>">4x Sem Juros</a></li>
+              <li><a href="<?php echo BASE . 'pedido/pagar/'. $view_request_id . '/5'; ?>">5x Sem Juros</a></li>
+              <li><a href="<?php echo BASE . 'pedido/pagar/'. $view_request_id . '/6'; ?>">6x Sem Juros</a></li>
+              <li><a href="<?php echo BASE . 'pedido/pagar/'. $view_request_id . '/7'; ?>">7x Sem Juros</a></li>
+              <li><a href="<?php echo BASE . 'pedido/pagar/'. $view_request_id . '/8'; ?>">8x Sem Juros</a></li>
+              <li><a href="<?php echo BASE . 'pedido/pagar/'. $view_request_id . '/9'; ?>">9x Sem Juros</a></li>
+              <li><a href="<?php echo BASE . 'pedido/pagar/'. $view_request_id . '/10'; ?>">10x Sem Juros</a></li>
+              <li><a href="<?php echo BASE . 'pedido/pagar/'. $view_request_id . '/11'; ?>">11x Sem Juros</a></li>
+              <li><a href="<?php echo BASE . 'pedido/pagar/'. $view_request_id . '/12'; ?>">12x Sem Juros</a></li>
+            </ul>
+          </div>
+
+        </font>
+
+        <br>
+
+
+        <font size="4">
+          <p><b>Valor parcela: </b>R$ 
+          <?php if(isset($view_parcela) && !empty($view_parcela)){
+            echo number_format($preco / $view_parcela, 2, ',', '.');
+          }
+          else{
+            echo 'X.XXX,XX';
+          }
+          ?> s/ Juros</p>
+
+        </font>
+
+
+      </div>
+
+
+
+
+      <div class="col-md-8">
+
+        <form action="/action_page.php">
+          <input checked type="radio" name="cartao" value="mastercard"> MasterCard<br>
+          <input type="radio" name="cartao" value="amex" id=> American Express<br>
+          <input type="radio" name="cartao" value="diners"> Diners Club<br>
+          <input type="radio" name="cartao" value="visa"> Visa<br>
+        </form>
+
+
+        <br>
+
+
+
+
+        <b>Numero do Cartão: </b>
+
+        <div class="row">
+          <div class="col-lg-2">
+            <div class="input-group">
+              <input required oninput="dezesseis(this)" name="numero" type="number" class="form-control" style="width:200px;">
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+
+
+
+        </div>
+
+        <b>Código de Segurança: </b>
+
+        <input  required oninput="quatro(this)" name="codigo" type="number" class="form-control" style="max-width:100px;">
+
+        <b>Nome do Títular: </b>
+
+        <input required type="text" name="nome"  class="form-control" style="max-width:300px;">
+
+        <b>Validade: </b>
+
+
+        <div class="row">
+          <div class="col-lg-2">
+            <div class="input-group">
+              <input required oninput="dois(this)" type="number" name="mes" type="text" class="form-control" aria-label="MM" placeholder="MM" style="max-width:80px;">
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+
+          <div class="col-lg-2">
+            <div class="input-group">
+              <input required oninput="dois(this)" name='ano' type="number" type="number" class="form-control" aria-label="AA" placeholder="AA" style="max-width:80px;">
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+  // This is an old version, for a more recent version look at
+  // https://jsfiddle.net/DRSDavidSoft/zb4ft1qq/2/
+
+  function dezesseis(object)
+  {
+    if (object.value.length > 16)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+
+
+  function quatro(object)
+  {
+    if (object.value.length > 4)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+
+
+  function dois(object)
+  {
+    if (object.value.length > 2)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+
+</script>
+
+
+<div class="row">
+
+  <div class="col-md-1">
+  </div>
+
+
+
+  <div class="col-md-2">
+    
+  </div>
+
+  <div class="col-md-5">
+  </div>
+
+  <div class="col-md-2">
+
+    <input <?php if(!isset(
+    $view_parcela) && empty($view_parcela)) 
+    echo 'disabled';?> type="submit" class="btn btn-danger btn-lg cor-botao" value="Concluír Pagamento">
+
+  </div> 
+  
+
+  <br>      
+
+</div>
+
+<br>  
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual
+        files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+
+
+        <script language="JavaScript" type="text/javascript" src="js/MascaraValidacao.js"></script>
+
+
+
+      </div>
+
+    </article>
+
+
+
+    <!-- Container do Rodapé--> 
+    <footer class="container">
+
+
+
+    </footer>
+    <!-- Container do Rodapé--> 
+  </section>
+
+</body>
+</form>
+</html>

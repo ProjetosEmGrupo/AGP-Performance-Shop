@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <FORM name="agp" method="POST" action="<?php echo BASE .'funcionario/editar-produto/' . $view_produto_id; ?>" enctype="multipart/form-data">
+
+    <aside class="container">
+      <?php echo (isset($this->alert) ? $this->alert : '');?>
+
+      <div class="col-md-12">
+
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+
+
+            <center><p>
+              <font size="6">
+               <!-- Mensagem -->
+               <b>Altera Produto</b>
+             </font>
+           </p></center>
+
+           <div class="col-md-1">
+           </div>
+
+           <div class="col-md-10">
+
+
+
+            <label for="tituloproduto"><b>Título:</b></label>
+
+            <input  required class="form-control"  style="max-width:900px;" id="inputEmailadm" type="text" placeholder="Digite o Título..." name="name" value="<?php echo $view_produto->name; ?>" maxlength="19" />
+
+
+            <label for="linkimagem1"><b>Link Imagem 1:</b></label>
+            <input style="max-width:700px;" id="linkimagem1" type="file" name="img1" />
+
+
+            <label for="linkimagem2"><b>Link Imagem 2:</b></label>
+            <input style="max-width:700px;" id="linkimagem2" type="file"  name="img2" />
+
+
+            <label for="linkimagem3"><b>Link Imagem 3:</b></label>
+            <input style="max-width:700px;" id="linkimagem3" type="file" name="img3" />
+
+
+            <label for="preco"><b>Preço:</b></label>
+            <input  required class="form-control" style="max-width:100px;" id="preco" type="number" placeholder="Preço" value="<?php  echo $view_produto->price; ?>" name="price" max=99999 />
+
+
+            <label for="qtdestoque"><b>Quantidade:</b></label>
+            <input placeholder="QTD" required class="form-control" style="min-width:90px; max-width:100px;" id="qtdestoque" type="number" name="stock" value="<?php echo $view_produto->stock; ?>"  max=9999/>
+
+            <label for="marca"><b>Marca/Fabricante:</b></label>  
+            <select  required class="form-control"   id="sel1" name="supplier_id">   
+              <?php 
+              if($view_supplier): 
+                foreach ($view_supplier as $supplier){
+                 ?>               
+                 <option  value="<?php  echo $supplier->id;?>" <?php if($supplier->id === $view_produto->supplier_id){ echo 'selected'; } ?> ><?php echo $supplier->name; ?></option>
+                 <?php 
+               } 
+               endif;
+               ?>
+             </select>
+             
+             <div class="form-group">
+              <label for="descricao">Filtro do produto por <?php echo $view_obs; ?>:</label>
+              
+              <input type="text" name="filter" placeholder="Digite somente a informação do filtro correspondente a categoria e escreva com um padrão EX: 6GB, 6 Núcleos, DDR4"  maxlength="20" class="form-control" required="true" value="<?php echo $view_produto->filter; ?>"> 
+
+            </div>
+
+
+            <div class="form-group">
+              <label for="descricao">Descrição Produto:</label>
+              
+              <textarea rows="4" required class="form-control" maxlength="10000" type="text" name="description" placeholder="Sua Descrição Aqui..."><?php echo $view_produto->description; ?></textarea>
+
+            </div>
+
+
+            <input value="Alterar" type="submit" class="btn btn-danger btn-lg cor-botao">
+
+          </FORM>
+       
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</aside>
+
+</article>
+
+</section>
+
+
+</body>
+</html>

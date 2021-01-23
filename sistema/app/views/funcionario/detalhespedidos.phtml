@@ -1,0 +1,182 @@
+<?php echo (isset($this->alert) ? $this->alert : '') ?>
+<aside class="container">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <center><p>
+                        <font size="5">
+                        <b>Detalhes Pedido <?php echo $view_pedido->id; ?></b>
+                        </font>
+                    </p></center>
+                <br>
+                <br>
+                <br>
+                <div class="col-md-4">                            
+                    <font size="4">
+                    <p><b>Dados do Comprador</b></p>
+                    </font>
+                    <?php
+                    $cliente = User::find($view_pedido->user_id);
+                    ?>
+                    <p>Nome: <?php echo $cliente->name; ?></p>
+                    <p>Email: <?php echo $cliente->email; ?></p>
+                    <p>RG: <?php echo $cliente->rg; ?></p>
+                    <p>CPF: <?php echo $cliente->cpf; ?></p>
+                </div>
+                <div class="col-md-4">
+                    <font size="4">
+                    <p><b>Endereço de Entrega</b></p>
+                    </font>
+                    <?php
+                    $frete = Freight::find_by_request_id($view_pedido->id);
+                    $endereco = Address::find($frete->address_id);
+                    ?>
+                    <p>Endereço: <?php echo $view_endereco->street; ?></p>
+                    <p>Número: <?php echo $view_endereco->number; ?></p>
+                    <p>Complemento: <?php echo $view_endereco->complement; ?></p>
+                    <p>Bairro: <?php echo $view_endereco->neighbourhood; ?></p>
+                    <p>Cidade: <?php echo $view_endereco->city; ?></p>
+                    <p>Estado: <?php echo $view_endereco->uf; ?></p>
+                    <p>CEP: <?php echo $view_endereco->cep; ?></p>
+                </div>
+                <div class="col-md-4">
+                    <font size="4">
+                    <p><b>Opções</b></p>
+                    </font>
+                    <button type="button" class="btn btn-primary btn cor-botao" data-toggle="modal" data-target="#cancelamento">
+                        Cancelar e Devolver Pagamento
+                    </button>
+                    <br>
+                    <br>
+                    <a ><button type="button" class="btn btn-default cor-botao" <?php
+                        if ($view_pedido->status !== 'Aguardando o Pagamento' && $view_pedido->status !== 'Cancelado') {
+                            
+                        } else {
+                            ?>
+
+                                    disabled
+                                    <?php
+                                }
+                                ?>
+                                >Imprimir Nota Fiscal</button></a>
+                    <br>
+                    <br>
+
+                    <a ><button type="button" class="btn btn-default cor-botao" <?php
+                        if ($view_pedido->status !== 'Em separacao') {
+                            echo 'disabled';
+                        }
+                        ?>
+                                >Imprimir Etiquetas para Envio</button></a>
+                    <div class="page-header">
+                    </div>
+                    <br>
+                    <a href="<?php echo BASE . 'funcionario/pedido'; ?>"><button type="button" class="btn btn-default cor-botao">Voltar</button></a>
+                </div>
+                <?php
+                $f = $view_endereco->uf;
+                if ($f === 'SP') {
+                    $prazo = array('pac' => 7, 'sedex' => 3);
+                } elseif ($f === 'DF' or $f === 'ES' OR $f === 'GO' OR $f === 'MS' OR $f === 'MG' OR $f === 'PR' OR $f === 'RJ' OR $f === 'RS' OR $f === 'SC') {
+                    $prazo = array('pac' => 8, 'sedex' => 4);
+                } elseif ($f === 'MT' or $f === 'BA') {
+                    $prazo = array('pac' => 10, 'sedex' => 5);
+                } elseif ($f === 'CE' or $f === 'PA' OR $f === 'PE' OR $f === 'TO') {
+                    $prazo = array('pac' => 10, 'sedex' => 4);
+                } elseif ($f === 'AL' or $f === 'AP' OR $f === 'AM' OR $f === 'MA' OR $f === 'PB' OR $f === 'PI' OR $f === 'RN' OR $f === 'RO' OR $f === 'SE') {
+                    $prazo = array('pac' => 17, 'sedex' => 5);
+                } elseif ($f === 'RR' or $f === 'AC') {
+                    $prazo = array('pac' => 9, 'sedex' => 5);
+                }
+                if ($view_frete->send_mode === 'pac') {
+                    $p = $prazo['pac'];
+                } else {
+                    $p = $prazo['sedex'];
+                }
+                ?>
+            </div>
+            <?php
+            $total = $view_produtos;
+            $valor = 0;
+            $qtd = 0;
+            foreach ($total as $t) {
+                $valor = $valor + $t->value_unit * $t->amount;
+                $qtd = $qtd + $t->amount;
+            }
+            $valor = $valor;
+            ?>
+            <div class="container">
+                <div class="col-md-4">
+                    <font size="4">
+                    <p><b>Dados do Pedido</b></p>   
+                    </font>
+                    <p> Quantidade de Produtos: <?php echo $qtd; ?></p>
+                    <p> Tipo de Frete: Correios - <?php echo strtoupper($view_frete->send_mode); ?></p>
+                    <p> Data Pedido: <?php echo date('d/m/Y', strtotime('+' . $p . ' days', strtotime($view_pagamento->data_payment))); ?></p>
+                    <p> Subtotal: R$ <?php echo number_format($valor, 2, ',', '.'); ?></p>
+                    <p> Frete: R$ <?php echo number_format($view_frete->value_freight, 2, ',', '.'); ?></p>
+                    <p> Total: R$ <?php echo number_format($valor + $view_frete->value_freight, 2, ',', '.'); ?></p>
+                </div>
+                <br>
+                <br>
+                <br>
+            </div>
+            <div class="col-md-12">
+                <center><p>
+                        <font size="5">
+                        <b>Lista de Produtos</b>
+                        </font>
+                    </p></center>
+            </div>
+            <div id="list" class="row">
+                <div class="table-responsive col-md-12">
+                    <table class="table" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>Cod</th>
+                                <th>Produto(s)</th>
+                                <th>Preço Unitário</th>
+                                <th>Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($view_produtos as $vp) {
+                                $product = Product::find($vp->product_id);
+                                ?>
+                                <tr>
+                                    <td><?php echo $product->id; ?></td>
+                                    <td><a href="<?php echo BASE . 'produto/detalhes/' . $product->id; ?>"><?php echo $product->name; ?></a></td>
+                                    <td>R$ <?php echo number_format($vp->value_unit, 2, ',', '.'); ?> </td>
+                                    <td><?php echo $vp->amount; ?></td>
+                                    <?php
+                                }
+                                ?>
+                            </tr>
+                            <!-- Linha -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="cancelamento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Cancelamento</h4>
+                        </div>
+                        <div class="modal-body">
+                            Deseja realmente Cancelar e Devolver Pagamento
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default cor-botao" data-dismiss="modal">Não</button>
+                            <a href="<?php echo BASE . 'funcionario/devolucao/' . $view_pedido->id; ?>"><button type="button" class="btn btn-primary cor-botao">Sim</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</aside>

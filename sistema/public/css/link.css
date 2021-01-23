@@ -1,0 +1,45 @@
+/*Configuração dos Links inferiores das paginas*/
+
+#config-links{
+	color:white;
+
+}
+
+
+
+/*Link voltar do Duvidas e Suporte*/
+#link_voltar{
+	color:#a80000;
+
+}
+#link_voltar:hover{
+	color:#540000;
+}
+
+
+
+
+
+/*Configuração dos Links das Listas*/
+#links-lista{
+	color:black;
+	text-decoration: none;
+}
+
+#links-lista:hover{
+	color:black;
+	text-decoration: none;
+	font-weight: bolder;
+}
+
+#links-lista:focus{
+	color: #a80000;
+	text-decoration: none;
+	font-weight: bolder;
+}
+
+#links-lista:active{
+	color: #540000;
+	text-decoration: none;
+	font-weight: bolder;
+}

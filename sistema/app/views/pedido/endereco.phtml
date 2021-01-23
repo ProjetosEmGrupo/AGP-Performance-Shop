@@ -1,0 +1,175 @@
+<section> 
+<?php if(isset($view_endereco->id) && !empty($view_endereco->id)){
+    $id = $view_endereco->id ;
+    } 
+    else{
+        $id = '';
+    }
+
+    ?>
+
+    <FORM name="agp" method="POST" action="<?php echo BASE . 'pedido/pagamento/' . $id ;  ?>" enctype="multipart/form-data">
+        <?php 
+        if (!isset($view_endereco) && empty($view_endereco)){ 
+            ?>
+            <div class="alert alert-danger">
+            <strong>Atenção!</strong> Para continuar selecione um endereço caso não possua um ou deseje cadastrar outro endereço clique em cadastrar endereço.
+          </div>
+    <?php  
+    }
+
+
+     ?>
+      <div class="container">
+        <br>
+        <div class="panel panel-default">
+          <div class="panel-body">
+
+
+            <font size="6">
+                <center><b><center>Endereço de Entrega</center></b></center>
+            </font>
+            <br>
+
+
+            <div class="col-md-8">
+                <?php if(isset($view_endereco) && !empty($view_endereco)){ ?>
+
+                <p><b>Endereço: </b><?php echo $view_endereco->street; ?></p>
+                <p><b>Número: </b><?php echo $view_endereco->number; ?></p>
+                <p><b>Complemento: </b><?php echo $view_endereco->complement; ?></p>
+                <p><b>Bairro: </b><?php echo $view_endereco->neighbourhood; ?></p>
+                <p><b>Cidade: </b><?php echo  $view_endereco->city; ?></p>
+                <p><b>CEP: </b><?php echo  $view_endereco->cep; ?></p>
+                <p><b>Estado: </b><?php echo  $view_endereco->uf; ?></p>
+                <?php 
+            }
+            else{
+             ?>
+
+             <p><b>Endereço: </b>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+             <p><b>Número: </b>XXXXXXXXXXXX</p>
+             <p><b>Complemento: </b>XXXXXXXXXXXX</p>
+             <p><b>Bairro: </b>XXXXXXXXXXXXx</p>
+             <p><b>Cidade: </b>XXXXXXXXXXXXXXx</p>
+             <p><b>CEP: </b>XXXXXXXXXXXXXXx</p>
+             <p><b>Estado: </b>XXXXXXXXXXXXXXx</p>
+             <?php 
+         } 
+         ?>
+
+     </div>
+
+
+     <div class="col-md-4">
+
+
+        <label for="editarestado">Endereços já Cadastrados:</label>
+
+        <div class="dropdown">
+
+            <button class="btn btn-default cor-botao dropdown-toggle" aria-haspopup="true" aria-expanded="true" data-toggle="dropdown" >
+              <?php if(isset($view_endereco) && !empty($view_endereco)){
+                echo $view_endereco->street .', '. $view_endereco->number;
+            }
+            else{
+                echo 'Selecione um endereço';
+            }
+            ?>
+            <span class="caret"></span>
+        </button>
+
+
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+            <?php foreach ($view_enderecos as $end) {
+               ?>
+               <li><a href="<?php echo BASE. 'pedido/endereco-entrega/' . $end->id; ?> "> <?php echo $end->street . ', ' . $end->number; ?></a></li>
+               <?php } ?>
+           </ul>
+       </div>
+
+       <br>
+       <?php if(isset($view_endereco) && !empty($view_endereco)){
+
+        ?>
+        <div class="col-md-6">
+
+           <label for="editarestado">Opções de Envio</label>
+
+           <br>
+           <input checked type="radio" name="frete" value="<?php echo 'pac-'. $view_fretes['pac']; ?>"> PAC - R$<?php echo number_format($view_fretes['pac'], 2, ',', '');?><br>
+           <input type="radio" name="frete" value="<?php echo 'sedex-'. $view_fretes['sedex']; ?>"> SEDEX - R$<?php echo number_format($view_fretes['sedex'], 2, ',', ''); ?><br>
+       </div>
+       <?php } ?>
+       <div class="col-md-4">
+           <a href="<?php echo BASE . 'endereco/exibir-endereco'; ?>"><button class="btn btn-default cor-botao" type="button" aria-haspopup="true" aria-expanded="false">Editar Endereços</button></a>
+           <br>
+           <br>
+           <a href="<?php echo BASE . 'endereco'; ?>"><button class="btn btn-default cor-botao" type="button" aria-haspopup="true" aria-expanded="false">Novo Endereço</button></a>
+
+       </div>
+
+   </div>
+   <div class="col-md-12">
+    <br>
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-1">
+            </div>
+
+
+
+            <div class="col-md-2">
+                <a href="carrinho.html"><button type="submit" class="btn btn-danger btn-lg cor-botao">Voltar</button></a>
+            </div>
+
+            <div class="col-md-6">
+            </div>
+
+            <div class="col-md-2">
+            <input <?php if(isset($view_endereco) && !empty($view_endereco))
+            {}else{
+                echo 'disabled';
+                } ?> type="submit" value="Concluír Compra" class="btn btn-danger btn-lg cor-botao">
+            </div>        
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+</div>
+</div>
+
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual
+        files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+
+
+        <script language="JavaScript" type="text/javascript" src="js/MascaraValidacao.js"></script>
+
+
+
+    </div>
+
+</article>
+
+</section>
+
+
+</body>
+</FORM>
+</html>

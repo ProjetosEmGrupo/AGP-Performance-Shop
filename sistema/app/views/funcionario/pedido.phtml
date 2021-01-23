@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+ <!-- SDK Facebook em javaScript -->
+
+ <div id="fb-root"></div>
+ <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.7";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<body>
+
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/Cor.css" rel="stylesheet">
+  <link href="css/link.css" rel="stylesheet">
+
+
+
+        <!-- The above 3 meta tags *must* come first in the head; any other head
+        content must come *after* these tags -->
+        <title>AGP Performance Shop - Página Administrativa</title>
+
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media
+        queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file://
+      -->
+
+
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+
+    </head>
+
+    <body>
+
+
+      <section> 
+
+        <!-- aside significa o canto superior Esquerdo-->
+        <!-- Codigo da Barra de Categorias do Site-->
+        <!-- Começo da Pagina, margim-top é o tamanho do espaço em relação ao borda da pagina-->
+        <aside class="container">
+
+
+
+          <div class="col-md-12">
+
+            <ul class="nav nav-tabs nav-justified">
+              <li><a href="<?php echo BASE; ?>funcionario/produto" data-toggle=""><div class="tab-cor">Produtos</div></a></li>
+              <li class="active"><a href="<?php echo BASE; ?>funcionario/pedido" data-toggle=""><div class="tab-cor">Pedidos</div></a></li>
+              <li><a href="<?php echo BASE; ?>funcionario/relatorio-vendas" data-toggle=""><div class="tab-cor">Relatório de Vendas</div></a></li>
+            </ul>
+
+            <div class="tab-content">
+
+              <!-- TAB PRODUTOS-->
+
+
+              <br>
+              <div class="panel panel-default">
+                <div class="panel-body">
+
+                  <font size="6">
+                   <!-- Mensagem -->
+                   <center><b><p>Pedidos Realizados - Vendas</p></b></center>
+                 </font>
+
+
+
+
+                 <!-- Lista Pedidos -->
+                 <div id="list" class="row">
+                  <div class="table-responsive col-md-12">
+                    <table class="table" cellspacing="0" cellpadding="0">
+
+                      <thead>
+                        <tr>
+                          <th>Data</th>
+                          <th>Nº Pedido</th>
+                          <th>Cliente</th>
+                          <th>Subtotal</th>
+                          <th>Frete</th>
+                          <th>Valor Total</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+
+                        <?php foreach ($view_pedidos as $vp) {
+
+                          $preco = 0;
+                          $produtos = ItemRequest::find_all_by_request_id($vp->id);
+                          $cliente = User::find($vp->user_id);
+                          $frete = Freight::find_by_request_id($vp->id);
+                          foreach ($produtos as $p) {
+                            $preco = $preco + $p->value_unit * $p->amount;
+                          }
+
+                          ?>
+                          <!-- Linha Pedidos (VENDAS) -->
+                          <tr>
+                            <td><?php echo date('d/m/Y', strtotime('+0 days', strtotime($vp->date_begin))); ?></td>
+                            <td><?php echo $vp->id; ?></td>
+                            <td><?php echo $cliente->name; ?></td>
+                            <td>R$ <?php echo number_format($preco, 2, ',', '.'); ?></td>
+                            <td>R$ <?php echo number_format($frete->value_freight, 2, ',', '.'); ?></td>
+                            <td>R$ <?php echo number_format($preco + $frete->value_freight, 2, ',', '.'); ?></td>
+                            <td class="actions">
+                              <a class="btn btn-default btn-xs cor-botao" href="<?php echo BASE . 'funcionario/detalhes-pedido/'. $vp->id; ?>">+Detalhes</a>
+                              <a class="btn btn-default btn-xs cor-botao" href="#">Imprimir Etiqueta</a>
+                            </td>
+                          </tr>
+                          <?php } ?>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </aside>
+
+
+      </section>
+
+
+
+
+    </body>
+    </html>

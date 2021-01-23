@@ -1,0 +1,231 @@
+
+
+<aside class="container">
+
+  <div class="col-md-12">
+
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+
+        <center><p>
+          <font size="5">
+           <b>Pedido Concluído com Sucesso</b>
+         </font>
+       </p></center>
+
+       <br>
+       <br>
+       <br>
+       <?php 
+       $f = $view_endereco->uf;
+       if($f === 'SP'){
+        $prazo = array('pac' => 7, 'sedex' => 3);
+      }
+      elseif($f === 'DF' or $f === 'ES' OR $f === 'GO' OR $f === 'MS' OR $f === 'MG' OR $f === 'PR' OR $f === 'RJ' OR $f === 'RS' OR $f === 'SC'){
+        $prazo = array('pac' => 8, 'sedex' => 4);
+      }
+      elseif($f === 'MT' or $f === 'BA'){
+        $prazo = array('pac' => 10, 'sedex' => 5);
+      }
+      elseif($f === 'CE' or $f === 'PA' OR $f === 'PE' OR $f === 'TO'){
+        $prazo = array('pac' => 10, 'sedex' => 4);
+      }
+      elseif($f === 'AL' or $f === 'AP' OR $f === 'AM' OR $f === 'MA' OR $f === 'PB' OR $f === 'PI' OR $f === 'RN' OR $f === 'RO' OR $f === 'SE'){
+        $prazo = array('pac' => 17, 'sedex' => 5);
+      }
+      elseif($f === 'RR' or $f === 'AC'){
+        $prazo = array('pac' => 9, 'sedex' => 5);
+      }
+      if($view_frete->send_mode === 'pac'){
+        $p = $prazo['pac'];
+      }
+      else{
+        $p = $prazo['sedex'];
+      }
+      ?>
+
+      <div class="col-md-4">                            
+        <font size="4">
+         <p><b>Número do Pedido: <?php echo $view_frete->request_id; ?></b></p>
+       </font>
+       
+
+     </div>
+
+
+     <div class="col-md-4">
+     </div>
+
+
+     <?php
+
+     $total = $view_produtos;
+     $valor = 0;
+
+     foreach ($total as $t) {
+       $valor = $valor + $t->value_unit * $t->amount;
+     }
+     $valor = $valor + $view_frete->value_freight;
+     ?>
+     <div class="col-md-4">
+      <p>
+        <font size="4">
+         <b>Valor Total R$ <?php echo number_format($valor, 2, ',', '.'); ?></b>
+       </font>
+     </p>
+
+   </div>
+
+
+
+
+
+   <div class="col-md-4">
+    <br>
+    <font size="4">
+     <p><b>Endereço de Entrega</b></p>
+   </font>
+   
+
+   
+
+
+   <font size="3">                                                     
+    <p>Endereço: <?php echo $view_endereco->street; ?>
+      <p>Número: <?php echo $view_endereco->number; ?></p>
+      <p>Complemento: <?php echo $view_endereco->complement; ?></p>
+      <p>Bairro: <?php echo $view_endereco->neighbourhood; ?></p>
+      <p>Cidade: <?php echo $view_endereco->city; ?></p>
+      <p>Estado: <?php echo $view_endereco->uf; ?></p>
+      <p>CEP: <?php echo $view_endereco->cep; ?></p>
+    </font>
+
+    
+
+  </div>
+
+
+
+  <div class="col-md-4">
+    <br>
+    <font size="4">
+     <p><b>Data de Entrega</b></p>
+   </font>
+
+
+   <font size="3">                                                     
+    <p>Entrega Prevista: <?php echo date('d/m/Y', strtotime('+'. $p .' days', strtotime(date('d-m-Y'))));?></p>                                                                  
+  </font>
+
+  
+  <font size="4">
+    <p><b>Valor do Frete</b></p>
+  </font>
+
+
+  <font size="3">                                                     
+    <p>R$ <?php echo number_format($view_frete->value_freight, 2, ',', '.'); ?></p>       
+  </font>
+
+</div>
+
+
+<div class="col-md-4">
+  <br>
+  <br>
+  <br>
+  <a href="<?php echo BASE. 'conta' ;?>"><button type="button" class="btn btn-default  cor-botao">Ir para Minha Conta</button></a>
+
+  <br>
+  <br>
+  <?php 
+
+  if($view_pagamento->type_payment  == 'cartao'){
+
+  }else{
+
+    ?>
+    <a href="<?php echo BASE. 'pedido/imprimir-boleto/' .$view_frete->request_id; ?>"><button type="button" class="btn btn-default  cor-botao">Imprimir Boleto</button></a>
+    <?php } ?>
+
+  </div>
+
+</div>
+
+
+<center><p>
+  <font size="3">
+   <b>Lista de Produtos</b>
+ </font>
+</p></center>
+
+
+
+<!-- Lista Produtos -->
+<div id="list" class="row">
+  <div class="table-responsive col-md-12">
+    <table class="table" cellspacing="0" cellpadding="0">
+
+      <thead>
+        <tr>
+          <th>Produto(s)</th>
+          <th>Preço Unitário</th>
+          <th>Quantidade</th>
+          <th>Tipo de Envio</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <?php foreach ($view_produtos as $vp) {
+          $product = Product::find($vp->product_id);
+          ?>
+          <!-- Linha -->
+          <tr>
+            
+            <td><a href="<?php echo BASE . 'produto/detalhes/'. $product->id; ?>"><?php echo $product->name; ?></a></td>
+            <td>R$ <?php echo number_format($vp->value_unit, 2, ',', '.'); ?> </td>
+            <td><?php echo $vp->amount ; ?></td>
+            <td>Correios - <?php echo $view_frete->send_mode; ?></td>
+
+            <?php 
+          } 
+          ?>
+        </tr>
+        <!-- Linha -->
+      </tbody>
+    </table>
+  </div>
+</div><!-- Lista Produtos -->
+
+
+
+</div>
+</div>
+</div>
+
+
+
+</aside>
+
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual
+        files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+        
+
+
+      </aside>
+
+    </article>
+
+  </section>
+
+
+</body>
+</html>

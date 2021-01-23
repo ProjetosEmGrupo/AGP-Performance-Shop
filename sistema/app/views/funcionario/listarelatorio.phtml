@@ -1,0 +1,96 @@
+
+<br>
+<aside class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+      <font size="6">
+       <!-- Mensagem -->
+       <center><b><p>Relatório</p></b></center>
+     </font>
+
+
+     <div class="panel-body">
+
+       <!-- Lista Pedidos -->
+       <div id="list" class="row">
+        <div class="table-responsive col-md-12">
+          <table class="table" cellspacing="0" cellpadding="0">
+
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Nº Pedido</th>
+                <th>Cliente</th>
+                <th>Status</th>
+                <th>Valor Total</th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <?php
+              $uh = 0;
+              foreach ($view_pedidos as $vp) {
+
+                $preco = 0;
+                $produtos = ItemRequest::find_all_by_request_id($vp->id);
+                $cliente = User::find($vp->user_id);
+                $frete = Freight::find_by_request_id($vp->id);
+
+                foreach ($produtos as $p) {
+                  $preco = $preco + $p->value_unit * $p->amount;
+
+                }
+                $uh = $uh + $preco + $frete->value_freight;
+                ?>
+                <!-- Linha Pedidos (VENDAS) -->
+                <tr>
+                  <td><?php echo date('d/m/Y', strtotime('+0 days', strtotime($vp->date_begin))); ?></td>
+                  <td><?php echo $vp->id; ?></td>
+                  <td><?php echo $cliente->name; ?></td>
+                  <td> <?php echo $vp->status; ?></td>
+
+                  <td>R$ <?php echo number_format($preco + $frete->value_freight, 2, ',', '.'); ?></td>
+
+
+                </tr>
+                <?php 
+              } ?>
+
+            </tbody>
+          </table>
+
+
+          <div class="col-md-9">
+          </div>
+          <div class="col-md-3">
+            <font size="3">
+             <!-- Mensagem -->
+             <p>Valor Total: <?php echo number_format($uh, 2, ',', '.'); ?></p>
+           </font>
+         </div>
+
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</aside>
+</div>
+</div>
+
+
+
+
+</aside>
+
+
+</section>
+
+
+
+
+</body>
+</html>

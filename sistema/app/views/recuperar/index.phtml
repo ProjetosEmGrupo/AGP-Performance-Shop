@@ -1,0 +1,37 @@
+<FORM name="agp" method="POST" action="<?php echo BASE;  ?>recuperar/solicitar" enctype="multipart/form-data">
+<aside class="container">
+      <?php echo (isset($this->alert) ? $this->alert : '')?>   
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <center>
+          <p>
+            <font size="6">
+              <!-- Mensagem -->
+              <b>Redefinir Senha</b>
+            </font>
+          </p>  
+   
+        </center>
+            <div class="col-md-3">
+           </div>
+        <div class="col-md-6">
+        <label for="inputEmail"><b>Digite o Email:</b></label>
+        
+        <input required class="form-control" id="inputEmail" type="email" name="email" maxlength="50" value="<?php echo $this->request->post('email') ?>" placeholder="Digite a sua Email..." />
+        <div class="row">
+                      <br>
+        <div class="row">
+                      <br>
+        <center><button type="submit" class="btn btn-danger btn-lg cor-botao">Enviar</button></center>
+  
+      
+
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+
+

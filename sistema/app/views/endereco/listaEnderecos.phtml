@@ -1,0 +1,78 @@
+
+<aside class="container">
+
+  <div class="col-md-12">
+
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+
+        <center><p>
+          <font size="5">
+           <b>Endereços Cadastrados</b>
+         </font>
+       </p></center>
+
+
+
+       <!-- Lista Produtos -->
+       <div id="list" class="row">
+        <div class="table-responsive col-md-12">
+          <table class="table" cellspacing="0" cellpadding="0">
+
+            <thead>
+              <tr>
+                <th>Endereço</th>
+                <th>Número</th>
+                <th>Complemento</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>CEP</th>
+                <th>Estado</th>
+                <th>Editar</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <!-- Linha -->
+              <?php 
+              if($view_enderecos):
+                foreach ($view_enderecos as $endereco){
+                ?>
+              <tr>
+                <th><?php echo $endereco->street; ?></th>
+                <th><?php echo $endereco->number; ?></th>
+                <th><?php echo $endereco->complement; ?></th>
+                <th><?php echo $endereco->neighbourhood; ?></th>
+                <th><?php echo $endereco->city; ?></th>
+                <th><?php echo $endereco->cep; ?></th>
+                <th><?php echo $endereco->uf; ?></th>
+                <td class="actions">
+                  <a class="btn btn-default btn-xs cor-botao" href="<?php echo BASE .'endereco/excluir/'. $endereco->id;?>">Excluir</a>
+                  <a  class="btn btn-default btn-xs cor-botao" href="<?php echo BASE .'endereco/alterar/'. $endereco->id;?>">Alterar</a>
+                </td>
+              </tr>
+
+              <?php   
+                }
+              endif;
+              ?>
+
+            </tbody>
+          </table>
+          <div class="col-md-1"></div>
+          <a href="<?php echo BASE .'conta/endereco';?>"><button type="button" class="btn btn-default cor-botao">Voltar</button></a>
+        </div>
+      </div><!-- Lista Produtos -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+</aside>

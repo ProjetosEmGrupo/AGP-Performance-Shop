@@ -1,0 +1,71 @@
+  <FORM name="agp" method="POST" action="<?php echo BASE . 'pedido/avaliar-produto/' . $view_produto_id ;  ?>" enctype="multipart/form-data">
+<section> 
+<?php echo (isset($this->alert) ? $this->alert : '')?>
+    <!-- aside significa o canto superior Esquerdo-->
+    <!-- Codigo da Barra de Categorias do Site-->
+    <!-- Começo da Pagina, margim-top é o tamanho do espaço em relação ao borda da pagina-->
+    <div class="container">
+
+
+
+        <br>
+        <div class="panel panel-default">
+          <div class="panel-body">
+
+            <font size="6">
+                <center><b>Avaliação do Produto</b></center>
+            </font>
+
+            <div class="col-md-4">
+            </div>
+
+            <div class="col-md-4">
+
+                <br>
+                <font size="2">
+                    <center><b>Avaliação:</br></center>
+                </font>
+
+                <center>
+
+                    <label class="radio-inline"><input checked="true" type="radio" name="nota" value="Otimo">Ótimo</label>
+                    <label class="radio-inline"><input <?php if(isset($view_nota) && !empty($view_nota) && $view_nota === 'Regular'){ echo 'checked'; } ?> type="radio" name="nota" value="Regular">Regular</label>
+                    <label class="radio-inline"><input  <?php if(isset($view_nota) && !empty($view_nota) && $view_nota === 'Pessimo'){ echo 'checked'; } ?> type="radio" name="nota" value="Pessimo">Péssimo</label>
+                    <br>
+                    <br>
+
+
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem:</label>
+                        <textarea class="form-control" rows="5" name="mensagem" id="mensagem" maxlength="50" > <?php if(isset($view_mensagem) && !empty($view_mensagem)){ echo $view_mensagem; } ?></textarea>
+                    </div>
+
+                </center>
+
+            </div>
+
+
+            <br>
+            <br>
+
+
+
+
+        </div>
+
+        <center><a href="<?php echo BASE . 'lista-produtos'; ?>"><button type="button" class="btn btn-default cor-botao">Voltar</button></a>
+            <input type="submit" value="Enviar" class="btn btn-default cor-botao" >
+            <br>
+            <br>
+        </center>
+    </div>
+</div>
+
+</article>
+
+</section>
+
+
+</body>
+</form>
+</html>

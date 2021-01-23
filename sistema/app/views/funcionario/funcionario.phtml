@@ -1,0 +1,52 @@
+﻿<FORM name="agp" method="POST" action="<?php echo BASE . 'funcionario/exibir-relatorio/' ;  ?>" target="_blank" enctype="multipart/form-data">
+  <aside class="container">
+    <?php echo (isset($this->alert) ? $this->alert : '');?>
+    <div class="col-md-12">
+      <ul class="nav nav-tabs nav-justified">
+        <li ><a href="<?php echo BASE; ?>funcionario/produto" ><div class="tab-cor">Produtos</div></a></li>
+        <li><a href="<?php echo BASE; ?>funcionario/pedido" ><div class="tab-cor">Pedidos</div></a></li>
+        <li class="active"><a href="<?php echo BASE; ?>funcionario/relatorio-vendas" ><div class="tab-cor">Relatório de Vendas</div></a></li>
+      </ul>
+
+      <div class="tab-content">
+        <font size="6">
+         <!-- Mensagem -->
+         <div class="tab-pane fade in active"  id="produtos">
+          <br>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <font size="6"> 
+               <center><b><p>Relatorios</p></b></center>
+             </font>
+             <center>
+               <div class="col-md-4">
+               </div>
+               <div class="col-md-4">
+                 <div class="input-group date" data-provide="datepicker">
+                 <input class="form-control" id="datepicker" type="text" placeholder="MM/DD/AAAA" maxlength="10" name="dataInicio"  />
+                   <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                  </div>
+                </div>  
+                <font size="4">  Até </font>
+                <div class="input-group date" data-provide="datepicker">
+                  <input type="text" class="form-control" placeholder="MM/DD/AAAA" maxlength="10" name="dataFim">
+                  <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                  </div>
+                </div>
+                <br>
+                <input type="submit" class="btn btn-default cor-botao" value="Exibir Relatórios" >
+              </center>
+            </font>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+</section>
+</FORM>
+</body>
+</html>

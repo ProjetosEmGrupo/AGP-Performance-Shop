@@ -1,0 +1,141 @@
+</header>
+<!-- Começo do Codigo -->
+
+<section> 
+
+    <!-- aside significa o canto superior Esquerdo-->
+    <!-- Codigo da Barra de Categorias do Site-->
+    <!-- Começo da Pagina, margim-top é o tamanho do espaço em relação ao borda da pagina-->
+    <div class="container">
+
+
+
+        <br>
+        <div class="panel panel-default">
+          <div class="panel-body">
+
+
+            <font size="6">
+                <center><b><center>Carrinho de Compras</center></b></center>
+            </font>
+
+            <br>
+
+
+            <div class="col-md-1">
+            </div>
+
+
+
+
+            <div class="col-md-10">
+
+
+                <font size="2">
+                    <center><b><center>Produto(s) Adicionado(s)</center></b></center>
+                </font>                                                                                                              
+
+                <!-- Lista Pedidos -->
+                <div id="list" class="row">
+                    <div class="table-responsive col-md-12">
+                        <table class="table" cellspacing="0" cellpadding="0">
+
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Valor Unitário</th>
+                                    <th>Qtd</th>
+                                    <th>Subtotal</th>
+                                    <th><th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <?php 
+
+                                    $test = Cart::find_all_by_hash($_COOKIE['sec_session_id']);
+                                    
+                                    $soma = 0;      
+                                    foreach ($test as $c) {
+                                        $produto = Product::find($c->product_id);
+                                        $soma = $soma + $produto->price * $c->amount;
+                                        
+                                        ?>
+
+                                        <!-- Produtos Adicionados -->
+                                        <tr>
+                                            <td><a href="<?php echo BASE . 'produto/detalhes/'. $produto->id; ?>"><?php echo $produto->name; ?></a></td>
+                                            <td>R$ <?php echo number_format($produto->price, 2, ',', '.');  ?></td>
+
+                                            <td>
+                                                <?php echo $c->amount;  ?>
+                                            </td>
+
+                                            <td>R$ <?php echo number_format($produto->price * $c->amount, 2, ',', '.'); ?></td>
+                                            <td class="actions">
+                                                <a class="btn btn-default btn-xs cor-botao" href="<?php echo BASE . 'carrinho/remove-produto/'. $c->seq; ?>">Excluir</a>
+                                            </td>
+                                        </tr>
+                                        <!-- Produtos Adicionados -->
+
+                                        <?php 
+                                      
+                                    }
+                                    ?>
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <br>
+                        <div class="col-md-11" align="right">
+                            <p>Valor Total: <b>R$ <?php echo number_format($soma, 2, ',', '.'); ?></b></p>
+                        </div>
+                        
+                    </div>
+                    <br>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <a href="<?php echo BASE . 'lista-produtos'; ?>"><button type="submit" class="btn btn-danger btn-lg cor-botao">Voltar</button></a>
+                        </div>
+
+                        <div class="col-md-6">
+                        </div>
+
+                        <div class="col-md-3">
+                            <a href="<?php echo BASE . 'pedido/endereco-entrega' ;?>"><button type="submit" class="btn btn-danger btn-lg cor-botao">Concluír Compra</button></a>
+                        </div>        
+
+                    </div>
+
+                </div>
+
+
+
+
+                <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+                <script src="js/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual
+        files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+
+
+        <script language="JavaScript" type="text/javascript" src="js/MascaraValidacao.js"></script>
+
+
+
+    </div>
+
+</article>
+
+</section>
+
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+
+</header>
+<FORM name="agp" method="POST" action="<?php echo BASE. 'pedido/pagar/' . $view_request_id; ?>" enctype="multipart/form-data">
+
+    <!-- Começo do Codigo -->
+
+    <section> 
+
+        <!-- aside significa o canto superior Esquerdo-->
+        <!-- Codigo da Barra de Categorias do Site-->
+        <!-- Começo da Pagina, margim-top é o tamanho do espaço em relação ao borda da pagina-->
+        <div class="container">
+
+
+
+            <br>
+            <div class="panel panel-default">
+              <div class="panel-body">
+
+
+                <font size="6">
+                    <center><b><center>Métodos de Pagamento</center></b></center>
+                </font>
+                <br>
+
+
+                <div class="col-md-12">
+                    <?php
+                    $preco = 0;
+                    
+                    $vl_pedido = ItemRequest::find_all_by_request_id($view_request_id);
+                    foreach ($vl_pedido as $vl) {
+                        $preco = $preco + $vl->value_unit * $vl->amount;
+                    }
+                    $frete = Freight::find_by_request_id($view_request_id);
+                    $preco = $preco + $frete->value_freight;
+                    ?>
+
+                    <font size="4">
+                        <p><b>Valor Total do Pedido: </b>R$ <?php echo number_format($preco, 2, ',', '.'); ?> </p>
+                    </font>
+                    <br>
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+
+
+                            <font size="3">
+                                <center><p>Meios de Pagamento Oferecidos</p></center>
+                            </font>
+                            <br>
+
+                            <input checked name="pagamento" value="cartao" type="radio">Pagar com Cartão de Crédito ou Débito </input>
+                            <br>
+                            <input name="pagamento" value="boleto" type="radio">Pagar Com Boleto Bancário</input>
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+
+                        <div class="row">
+
+                            <div class="col-md-1">
+                            </div>
+
+
+
+                            <div class="col-md-2">
+                                <a href="<?php echo BASE. 'pedido/endereco-entrega/' ;?>"><button type="button" class="btn btn-danger btn-lg cor-botao">Voltar</button></a>
+                            </div>
+
+                            <div class="col-md-6">
+                            </div>
+
+                            <div class="col-md-2" >
+                                <input type="submit" class="btn btn-danger btn-lg cor-botao" value="Continuar" >
+                               
+                                </div>        
+
+                            </div>      
+
+
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+
+
+                <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+                <script src="js/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual
+        files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+
+
+        <script language="JavaScript" type="text/javascript" src="js/MascaraValidacao.js"></script>
+
+
+
+    </div>
+
+</article>
+
+
+
+<!-- Container do Rodapé--> 
+<footer class="container">
+
+
+    <div class="col-md-12">
+
+    </div>
+
+</footer>
+<!-- Container do Rodapé--> 
+</section>
+
+</body>
+</form>
+</html>

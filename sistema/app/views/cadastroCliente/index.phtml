@@ -1,0 +1,137 @@
+
+<html>
+<FORM name="agp" method="POST" action="<?php echo BASE;  ?>cadastroCliente/cadastrar" enctype="multipart/form-data">
+  <head>
+
+   <!-- SDK Facebook em javaScript -->
+
+   <div id="fb-root"></div>
+   <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.7";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  <body>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+
+  </head>
+
+  <body>
+
+
+
+
+   <?php echo (isset($this->alert) ? $this->alert : '')?>
+
+   <div class="col-md-12">
+
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+
+        <center><p>
+
+          <font size="6">
+           <!-- Mensagem -->
+           <b>Cadastro de Conta</b>
+         </font>
+       </p></center>
+
+
+       <div class="col-md-2">
+       </div>
+
+       <div class="col-md-4">
+
+        <label for="inputNome"><b>Nome: *</b></label>
+        <input  required  class="form-control" id="inputNome"  name="name" type="text" maxlength=50   placeholder="Digite o seu Nome..." value="<?php echo $this->request->post('name') ?>"/>
+
+
+        <label for="inputEmail"><b>Email: *</b></label>
+        <input  required  class="form-control" id="inputEmail" name="email" type="email" maxlength=50   placeholder="Digite a sua Email..." value="<?php echo $this->request->post('email') ?>" />
+
+        <label for="inputEmail"><b>Confirmar Email: *</b></label>
+        <input  required class="form-control" id="inputEmail" name="confirmemail" type="email" maxlength=50   placeholder="Digite a sua Email Novamente..." value="<?php echo $this->request->post('confirmemail') ?>"/>
+
+
+        <label for="inputSenha"><b>Senha: *</b></label>
+        <input  required class="form-control" id="inputSenha" name="password" type="password"  maxlength=30  placeholder="Digite a sua senha..." />
+
+        <label for="inputSenha"><b>Confirmar Senha: *</b></label>
+        <input  required class="form-control" id="inputSenha" name="confirmpassword"  maxlength=30  type="password" placeholder="Digite a sua senha Novamente..." />
+
+        <br>
+        <font size="1">
+         <b>* Campos Obrigatorios</b>
+       </font>
+
+
+     </div>
+
+     <div class="col-md-4">
+
+      <label for="inputCPF"><b>CPF:* </b></label>
+      <input oninput="cpf(this)" required class="form-control" id="inputNumber" name="cpf" type="number"  max=99999999999  step=1 placeholder="Digite apenas Numeros" value="<?php echo $this->request->post('cpf') ?>"/>
+
+    <label for="inputRG"><b>RG:* </b></label>
+    <input oninput="rg(this)" required  class="form-control" name="rg" id="inputNumber" type="number"  max=999999999 step=1 placeholder="Digite apenas Numeros" value="<?php echo $this->request->post('rg') ?>"/>
+
+    <br>
+    <center><input type="submit" class="btn btn-danger btn-lg cor-botao" value="Cadastrar"></center>
+
+  </div>
+
+
+
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+    function cpf(object)
+  {
+    if (object.value.length > 15)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+
+  function rg(object)
+  {
+    if (object.value.length > 9)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+
+</script>
+
+
+
+<!-- Container do Rodapé--> 
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual
+        files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+
+      </aside>
+
+    </article>
+
+  </section>
+
+
+</body>
+</FORM>
+</html>

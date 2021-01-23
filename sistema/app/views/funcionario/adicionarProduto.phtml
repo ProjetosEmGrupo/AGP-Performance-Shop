@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <?php if(isset($view_id_departament) && !empty($view_id_departament)){
+    $departament = $view_id_departament;
+  } 
+  else{
+    $departament = "";
+  }
+  ?>
+  <FORM name="agp" method="POST" action="<?php echo BASE .'funcionario/cadastrar-produto/' . $departament; ?>" enctype="multipart/form-data">
+
+    <aside class="container">
+      <?php echo (isset($this->alert) ? $this->alert : '');?>
+
+      <div class="col-md-12">
+
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+
+
+            <center><p>
+              <font size="6">
+               <!-- Mensagem -->
+               <b>Adicionar Produto</b>
+             </font>
+           </p></center>
+
+           <div class="col-md-1">
+           </div>
+
+           <div class="col-md-10">
+
+
+
+            <label for="tituloproduto"><b>Título:</b></label>
+ 
+            <input  required class="form-control"  style="max-width:900px;" maxlength="19" id="inputEmailadm" type="text" placeholder="Digite o Título..." name="name" />
+
+
+            <label for="linkimagem1"><b>Link Imagem 1:</b></label>
+            <input   required style="max-width:700px;" id="linkimagem1" type="file" name="img1" />
+
+
+            <label for="linkimagem2"><b>Link Imagem 2:</b></label>
+            <input  required style="max-width:700px;" id="linkimagem2" type="file"  name="img2" />
+
+
+            <label for="linkimagem3"><b>Link Imagem 3:</b></label>
+            <input  required style="max-width:700px;" id="linkimagem3" type="file" name="img3" />
+
+
+            <label for="preco"><b>Preço:</b></label>
+            <input  required class="form-control" style="max-width:100px;" max="999999" id="preco" type="number" placeholder="Preço" name="price" />
+
+
+            <label for="qtdestoque"><b>Quantidade:</b></label>
+            <input placeholder="QTD" required class="form-control" style="min-width:90px; max-width:100px;" id="qtdestoque" type="number" name="stock" max=9999 value="<?php echo $this->request->post('stock'); ?>" />
+
+            <label for="marca"><b>Marca/Fabricante:</b></label>  
+            <select  required class="form-control" id="sel1" name="supplier_id">   
+              <?php 
+              if($view_supplier): 
+                foreach ($view_supplier as $supplier){
+
+                 ?>
+
+
+
+                 <option  value="<?php echo $supplier->id; ?>"><?php echo $supplier->name; ?></option>
+
+                 <?php 
+               } 
+               endif;
+
+               ?>
+             </select>
+
+             <div class="form-group">
+              <label for="descricao">Filtro do produto por <?php echo $view_obs; ?>:</label>
+              
+              <input type="text" maxlength="20" name="filter" placeholder="Digite somente a informação do filtro correspondente a categoria e escreva com um padrão EX: 6GB, 6 Núcleos, DDR4" class="form-control" required="true" value="<?php echo $this->request->post('filter'); ?>"> 
+
+            </div>
+
+
+            <div class="form-group">
+              <label for="descricao">Descrição Produto:</label>
+              
+              <textarea rows="4" required maxlength="10000" class="form-control" type="text" name="description" placeholder="Sua Descrição Aqui..."><?php echo $this->request->post('description'); ?></textarea>
+
+            </div>
+
+
+            <input value="Cadastrar" type="submit" class="btn btn-danger btn-lg cor-botao">
+            <a href="funcionario.html"><button type="submit" class="btn btn-danger btn-lg cor-botao">Cancelar</button></a></p>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </aside>
+
+</article>
+
+</section>
+
+</FORM>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<!-- aside significa o canto superior Esquerdo-->
+<!-- Codigo da Barra de Categorias do Site-->
+<!-- Começo da Pagina, margim-top é o tamanho do espaço em relação ao borda da pagina-->
+<aside class="container">
+
+
+  <div class="row">
+
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+
+    </div>
+
+  </div>
+
+  <div class="col-sm-12">
+
+    <ul class="nav nav-tab nav-justified">
+      <li class="active"><a href="<?php echo BASE . 'conta/informacao'; ?>"><div class="tab-cor">Informações</div></a></li>
+      <li><a href="<?php echo BASE . 'conta/endereco'; ?>"><div class="tab-cor">Endereços</div></a></li>
+      <li><a href="<?php echo BASE . 'conta/pedido'; ?>"><div class="tab-cor">Pedidos</div></a></li>
+    </ul>
+
+    <br>
+
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <font size="6">
+          <center><b>Pedidos da Conta</b></center>
+        </font>
+        <br>
+
+
+
+        <!-- Lista Pedidos -->
+        <div id="list" class="row">
+          <div class="table-responsive col-md-12">
+            <table class="table" cellspacing="0" cellpadding="0">
+
+              <thead>
+                <tr>
+                  <th>Nº Pedido:</th>
+                  <th>Data:</th>
+                  <th>Total do Pedido:</th>
+                  <th>Status:</th>
+                  <th>Detalhes:</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+
+                <?php foreach ($view_pedidos as $vp) {
+
+                  $preco = 0;
+                  $produtos = ItemRequest::find_all_by_request_id($vp->id);
+                  foreach ($produtos as $p) {
+                    $preco = $preco + $p->value_unit * $p->amount;
+                  }
+
+                  ?>
+                  
+                  <tr>
+                    <td><?php echo $vp->id; ?></td>
+                    <td><?php echo date('d/m/Y', strtotime('+0 days', strtotime($vp->date_begin))); ?></td>
+                    <td>R$ <?php echo number_format($preco, 2, ',', '.'); ?></td>
+                    <td><?php echo $vp->status; ?></td>
+                    <td class="actions">
+                      <a class="btn btn-default btn-xs cor-botao" href="<?php echo BASE . 'pedido/detalhes/'. $vp->id; ?>">+Detalhes</a>
+                    </td>
+                  </tr>
+
+
+                  <?php 
+                }
+                ?>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+
+
+        <?php 
+/*
+          <!-- Paginação / contador de Paginas-->
+
+          <div id="bottom" class="row">
+            <div class="col-md-12">
+              <ul class="pagination">
+
+                <li class="disabled"><a><div class="cor-paginacao-desativada">&lt; Anterior</div></a></li>
+
+                <li class="disabled"><a><div class="cor-paginacao-desativada">1</div></a></li>
+
+                <li><a href="#"><div class="cor-paginacao">2</div></a></li>
+
+                <li><a href="#"><div class="cor-paginacao">3</div></a></li>
+
+                <li class="next"><a href="#" rel="next"><div class="cor-paginacao">Próximo &gt;</div></a></li>
+              </ul>
+            </div>
+          </div> 
+        </div> 
+        <!-- Paginação / contador de Paginas-->
+*/
+        ?>
+      </div>
+
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="js/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual
+        files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+
+
+
+      </aside>
+
+
+    </section>
+
+
+
+
+  </body>
+  </html>

@@ -1,0 +1,254 @@
+/*Configurações das Cores na Pagina*/
+
+
+
+/*Comentarios da Galeria*/
+/*.cor-padrao-carossel{
+	background-color: #a80000;
+	border-color: #540000;
+	border-radius: 50px;
+}*/
+
+/*Cores dos titulos das especificações do anuncio*/
+.cor-padrao-espec{
+	color:#a80000;
+	font-weight: bold;
+	font-size: 16px;
+
+}
+
+
+.link-cadastro-login{
+	color:#a80000;
+}
+
+.link-cadastro-login:hover{
+	color:#540000;
+}
+
+.link-cadastro-login:focus{
+	color:#540000;
+}
+
+
+
+.selecao-produto-lista{
+
+}
+
+.selecao-produto-lista:hover{
+	border-color:#a80000;
+
+}
+
+
+
+
+
+/*Cores dos filtros de Categorias Lateral*/
+.cor-filtro-lista{
+	color:black;
+	border-color: #a80000;
+	border-style: solid;
+	border-width: 1px;
+}
+.cor-filtro-lista-a{
+	color:black;
+	border-color: #a80000;
+	border-style: solid;
+	border-width: 2px;
+}
+
+
+
+
+
+
+/*Cor Voltar e Proximo do icone das fotos... */
+
+.img-cor{
+	color:#a80000;
+}
+
+.img-cor:hover{
+	color:#540000;
+}
+
+.img-cor:active{
+	color:white;
+}
+
+.img-cor:focus{
+	color:#a80000;
+}
+
+
+
+
+
+
+
+/*Cor Barra Superior*/
+.fundo-barra{
+	color:white;
+	background-color: #a80000;
+	border-color: #540000;
+}
+/*Cor das opçoes da Barra Superior*/
+.cor-barra{
+	color:white;
+	background-color: #a80000;
+	border-color: #540000;
+}
+.cor-barra:hover{
+	color:white;
+	background-color: #540000;
+	border-color: #540000;
+}
+
+
+
+
+/*Cor para botões da barra superior*/
+.cor-botao-nav{
+	color:white;
+	background-color:red;
+	border-color: #a80000;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+}
+
+
+
+
+
+/*Cor para botões como Galeria de Imagens e Comprar*/
+.cor-botao{
+	color:white;
+	background-color:#a80000;
+	border-color: #540000;
+	border-style: none;
+
+}
+.cor-botao:hover{
+	color:white;
+	background-color: #540000;
+	border-color: #a80000;
+	border-style: none;
+
+}
+.cor-botao:active{
+	color:white;
+	background-color:#a80000;
+	border-color: #540000;
+	border-style: none;
+
+
+}
+.cor-botao:focus{
+	color:white;
+	background-color:#a80000;
+	border-color: #540000;
+	border-style: none;
+}
+
+
+
+
+
+/*Cor das label da pagina*/
+.cor-label{
+	color:white;
+	background-color:#a80000;
+	border-color: #540000;
+
+}
+
+
+
+
+
+
+/*Cor filtro de comentario DropDown*/
+.cor-filtro{
+	color:#a80000;
+	border-style: none;
+	background-color:white;
+}
+.cor-filtro:hover{
+	color:#540000;
+	border-style: none;
+	background-color:white;
+}
+.cor-filtro:focus{
+	color:#a80000;
+	border-style: none;
+	background-color:white;
+}
+
+
+
+
+
+
+
+/*Cor Panel das Avaliações */
+.cor-padrao-fixa{
+	border-color: #a80000;
+	border-style: solid;
+	border-width: 3px;
+
+}
+.cinza-claro{
+	background-color:#DFDDDE;
+	color:black;
+}
+
+
+
+
+
+
+
+/*Cor da barra Inferior*/
+.cor-barra-fim{
+	background-color: #540000;
+	color:white;
+}
+
+
+
+
+
+/*Dados da Empresa no Footer*/
+.dados-empresa{
+	border-style: none;
+}
+
+.dados-fonte-titulo{
+	color:#a80000;
+	font-weight:bolder;
+	font-size: 
+}
+
+.dados-fonte{
+	color:black;
+}
+.dados-fonte-condicoes{
+	color:#7e7e7e;
+	font-size: 10px;
+}
+
+
+
+
+}
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
+}
+.footer, .push {
+    height: 155px; /* .push must be the same height as .footer */
+}

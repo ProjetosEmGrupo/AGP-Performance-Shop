@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<!-- Começo do Codigo -->
+<section> 
+
+ <!-- aside significa o canto superior Esquerdo-->
+ <!-- Codigo da Barra de Categorias do Site-->
+ <!-- Começo da Pagina, margim-top é o tamanho do espaço em relação ao borda da pagina-->
+ <aside class="container">
+
+  <?php echo (isset($this->alert) ? $this->alert : '')?>
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+
+  </div>
+
+  <div class="col-sm-12">
+
+    <ul class="nav nav-tab nav-justified">
+      <li class="active"><a href="<?php echo BASE . 'conta/informacao'; ?>"><div class="tab-cor">Informações</div></a></li>
+      <li><a href="<?php echo BASE . 'conta/endereco'; ?>"><div class="tab-cor">Endereços</div></a></li>
+      <li><a href="<?php echo BASE . 'conta/pedido'; ?>"><div class="tab-cor">Pedidos</div></a></li>
+    </ul>
+
+
+
+
+    <br>
+
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <font size="6">
+          <center><b>Informações da Conta</b></center>
+
+        </font>
+
+        <div class="col-md-4">
+        </div>
+
+        <div class="col-md-4">
+
+          <br>
+          <p><b>Nome: </b> <?php echo $view_user->name; ?> </p>
+          <p><b>Email: </b><?php echo $view_user->email; ?></p>
+          <p><b>RG: </b><?php echo  $view_user->rg; ?> </p>
+          <p><b>CPF: </b><?php  echo $view_user->cpf; ?></p>
+
+          <br>
+          <br>
+
+          <center><a href="<?php echo BASE . 'conta/redefinir-email'; ?>"><button type="button" class="btn btn-default cor-botao">Editar Email</button></a>
+            <a href="<?php echo BASE . 'conta/redefinir-senha'; ?>"><button type="button" class="btn btn-default cor-botao">Editar Senha</button></a></center>
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="js/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual
+        files as needed -->
+
+        <script src="js/bootstrap.min.js"></script>
+
+
+
+      </aside>
+
+
+    </section>
+
+
+
+
+  </body>
+  </html>

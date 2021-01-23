@@ -1,0 +1,78 @@
+  
+<FORM name="agp" method="POST" action="<?php echo BASE;  ?>conta/editar-senha" enctype="multipart/form-data">
+ <div id="fb-root"></div>
+ <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.7";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="js/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual
+        files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+        <aside class="container" style="margin-top:100px;">
+
+          <?php echo (isset($this->alert) ? $this->alert : '')?>
+
+          <div class="col-md-12">
+
+
+            <div class="panel panel-default">
+              <div class="panel-body">
+
+
+
+
+                <center><p>
+
+                  <font size="6">
+                   <!-- Mensagem -->
+                   <b>Redefinir Senha</b>
+                 </font>
+               </p></center>
+
+
+
+               <div class="col-md-4">
+
+               </div>
+
+
+               <div class="col-md-4">
+
+                <label for="inputSenha"><b>Digite a Nova Senha:</b></label>
+                <input  required class="form-control" id="inputSenha" type="password" maxlength="30" name="password" placeholder="Sua senha" />
+                <label for="inputSenha2"><b>Digite a Senha Novamente:</b></label>
+                <input required  class="form-control" id="inputSenha2" type="password" name="confirmpassword" maxlength="30" placeholder="Sua senha Novamente" />
+
+
+                <br>
+                <br>
+
+                <center><button class="btn btn-danger btn-lg cor-botao">Redefinir</button> </center>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+
+
+
+
+
+    </aside>
+
+  </article>
+
+</section>
+
+</FORM>
+</body>
+</html>
